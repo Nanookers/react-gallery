@@ -1,11 +1,11 @@
 import React from 'react';
 import Axios from 'axios';
-import { Button } from '@material-ui/core';
+
 import { useState, useEffect } from 'react';
 import './App.css';
 import GalleryList from '../App/GalleryList/GalleryList';
 import Header from '../App/Header/Header';
-import GalleryItem from './GalleryItem/GalleryItem';
+
 
 function App() {
 
@@ -29,9 +29,7 @@ function App() {
     return (
       <div className="App">
         <Header />
-      <div className='wrapper'>
         <GalleryList getPhotos={getPhotos} photoList={photoList}/>
-        </div>
       </div>
     );
 }

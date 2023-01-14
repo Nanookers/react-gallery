@@ -1,9 +1,9 @@
 import Axios from 'axios';
 import { Button } from '@material-ui/core';
-import { useState, useEffect } from 'react';
+import { useState, } from 'react';
 import './ItemCard.css'
 
-function ItemCard( {photoList, getPhotos} ) {
+function ItemCard( {photo, getPhotos  } ) {
 
     const [descriptionState, setDiscriptionState] = useState(false);
 
@@ -22,33 +22,46 @@ function ItemCard( {photoList, getPhotos} ) {
     }
 
     // Return the 'card' with button attached to it.
-   
-    return (
+    switch (descriptionState){
+        case false:    
+            return (
 
-            <div >
-                {photoList.map(photo => (
-                    
-                    <div className="cardBody" key = {photo.id}>
-                        
-                        <p onClick={() => setDiscriptionState(!descriptionState)}>
-                            {console.log(descriptionState)}
-                            <img id = {photo.id} 
-                                src= {photo.path} 
-                                    style={{width: 200, height:200}} /></p>
-                        
-                       <p><Button variant="contained" 
-                            onClick={increaseLikes}
-                                id={photo.id} 
-                                    style={{width: 200}}>
-                                        {photo.likes === 0 ? "Like This Photo" : `Liked ${photo.likes} Times!`}    
-                        </Button></p>
-                       
+                    <div className='cardWithButton'>
+                            <div  key={photo.id} >
+                                <div className = 'photo' 
+                                    onClick={() => setDiscriptionState(!descriptionState)}>
+                                        <img className="cardBody" id = {photo.id} src= {photo.path} />
+                                </div>
+                                
+                               <Button variant="contained" 
+                                    onClick={increaseLikes}
+                                        id={photo.id} 
+                                            style={{width: 200}}>
+                                                {photo.likes === 0 ? "Like This Photo" : `Liked ${photo.likes} Times!`}    
+                                </Button>
+                            </div>   
                     </div>
-                            
-                ))}
+                
+            )
+        case true:
+            return (
+                <div className='cardWithButton'>
+                    <div className="cardBody" key = {photo.id}>    
+                        <div onClick={() => setDiscriptionState(!descriptionState)}>
+                                <p className='descriptionText'>{photo.description}</p>
+                        </div>
+                                
+                               <Button variant="contained" 
+                                    onClick={increaseLikes}
+                                        id={photo.id} 
+                                            style={{width: 200}}>
+                                                {photo.likes === 0 ? "Like This Photo" : `Liked ${photo.likes} Times!`}    
+                                </Button>
+                    </div>                
             </div>
-        
-    )
-}
+
+            )    
+    }
+}   
 
 export default ItemCard;
