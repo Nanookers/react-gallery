@@ -1,11 +1,12 @@
 import Axios from 'axios';
 import GalleryItem from '../GalleryItem/GalleryItem';
+import ItemCard from '../ItemCard/ItemCard';
 
-function GalleryList( {photoList} ) {
+function GalleryList( {photoList, getPhotos} ) {
     return (
         <>
             <p>Gallery goes hard</p>
-            <GalleryItem photoList={photoList}  />
+            <ItemCard getPhotos={getPhotos} photoList={photoList}  />
             
         </>
     )

@@ -30,7 +30,7 @@ function App() {
       <div className="App">
         <Header />
       <div className='wrapper'>
-        <GalleryList photoList={photoList}/>
+        <GalleryList getPhotos={getPhotos} photoList={photoList}/>
         </div>
       </div>
     );

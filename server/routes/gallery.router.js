@@ -11,6 +11,7 @@ router.put('/like/:id', (req, res) => {
     for(const galleryItem of galleryItems) {
         if(galleryItem.id == galleryId) {
             galleryItem.likes += 1;
+            console.log(galleryItem.likes);
         }
     }
     res.sendStatus(200);
