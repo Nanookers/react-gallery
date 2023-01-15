@@ -5,8 +5,8 @@ const galleryItems = require('../modules/gallery.data');
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
 
-
-router.put('/likes/id', ( req, res ) => {
+// PUT Route
+router.put('/id', ( req, res ) => {
     let idToUpdate = req.params.id;
     let likeStatus =  req.body.likes
     
@@ -28,6 +28,26 @@ router.put('/likes/id', ( req, res ) => {
         res.sendStatus(500)
     })
 })
+
+// POST
+router.post("/", (req, res) => {
+    const newPhoto = req.body;
+    
+    const sqlQuery = `
+      INSERT INTO "react_gallery" ("path", "description", "likes")
+        VALUES ($1, $2, $3);
+    `;
+  
+    pool.query(sqlQuery, [newPhoto.path, newPhoto.description, newPhoto.likes])
+      .then((result) => {
+        console.log("Item added to the database:", newPhoto);
+        res.sendStatus(201);
+      })
+      .catch((error) => {
+        console.log("Error in POST server:", error);
+        res.sendStatus(500);
+      });
+  });
 
 
 // GET Route

@@ -1,10 +1,10 @@
 import React from 'react';
 import Axios from 'axios';
-
 import { useState, useEffect } from 'react';
 import './App.css';
-import GalleryList from '../App/GalleryList/GalleryList';
 import Header from '../App/Header/Header';
+import GalleryList from '../App/GalleryList/GalleryList';
+import SubmissionForm from '../SubmissionForm/SubmissionForm';
 
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
         console.log(response.data);
         setPhotoList(response.data)
       }).catch(err => {
-        alert('error getting shopping list');
+        alert('error getting photoGallery');
         console.log(err);
       })
   }
@@ -29,6 +29,7 @@ function App() {
     return (
       <div className="App">
         <Header />
+        <SubmissionForm getPhotos={getPhotos}/>
         <GalleryList getPhotos={getPhotos} photoList={photoList}/>
       </div>
     );
