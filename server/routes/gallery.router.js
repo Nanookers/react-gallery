@@ -1,17 +1,17 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const galleryItems = require('../modules/gallery.data');
+
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
 
 // PUT Route
-router.put('/id', ( req, res ) => {
-    let idToUpdate = req.params.id;
-    let likeStatus =  req.body.likes
-    
-    likeStatus += 1;
+router.put('/likes/:id', ( req, res ) => {
 
+    let idToUpdate = req.params.id;
+    let likeStatus =  Number(req.body.likes)
+    
+    
     let sqlQuery =`
         UPDATE "react_gallery"
             SET "likes" = $1
@@ -21,10 +21,10 @@ router.put('/id', ( req, res ) => {
     let sqlValues = [likeStatus, idToUpdate]
     pool.query(sqlQuery, sqlValues)
     .then((dbRes) => {
-        console.log('successful update from PUT Serverside');
+        console.log('Serveside PUT', dbRes);
         res.sendStatus(201)
     }).catch(( dbErr)=>{
-        console.log('broke in PUT serverside', dbErr);
+        console.log('broke PUT DB', dbErr);
         res.sendStatus(500)
     })
 })
@@ -66,5 +66,23 @@ router.get('/', (req, res) => {
         res.sendStatus(500);
       })
   }) // END GET Route
+
+
+router.delete("/:id", (req, res) => {
+    console.log(req.params);
+    let idToDelete = req.params.id;
+    let sqlQuery = `
+              DELETE FROM "react_gallery"
+                WHERE "id"=$1
+            `;
+    let sqlValues = [idToDelete];
+    pool.query(sqlQuery, sqlValues)
+      .then((dbRes) => {
+        res.sendStatus(200);
+      })
+      .catch((dbErr) => {
+        console.log("broke in Delete route", dbErr);
+      });
+  });
 
 module.exports = router;

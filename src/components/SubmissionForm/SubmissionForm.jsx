@@ -31,17 +31,22 @@ function SubmissionForm({getPhotos}) {
     return (
         <>
             <h1> Add A Photo </h1>
+            
             <form onSubmit={handleSubmit}>
                 <TextField id="standard-basic" 
-                    label="Photo URL" 
-                        variant="standard" 
-                            value={photoInput}
-                            onChange={(event) => setPhotoInput(event.target.value)}/>
+                    className='urlButton'
+                        label="Photo URL" 
+                            variant="standard" 
+                                value={photoInput}
+                                    onChange={(event) => setPhotoInput(event.target.value)}/>
+                
                 <TextField id="standard-basic" 
-                    label="Description" 
-                        variant="standard" 
-                            value={descriptionInput}
-                            onChange={(event) => setDescriptionInput(event.target.value)}/>
+                    className='desButton'
+                        label="Description" 
+                            variant="standard" 
+                                value={descriptionInput}
+                                    onChange={(event) => setDescriptionInput(event.target.value)}/>
+                
                 <Button variant="contained"  type="submit" >Submit</Button>          
             </form>
         </>
