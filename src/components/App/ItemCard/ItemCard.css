@@ -6,14 +6,17 @@
     gap: 1em;
     margin: 1em 3em 1em  3em;
     object-fit: contain;
+    background-size: cover;
     box-shadow: 0 2px 15px rgb(171, 170, 170);   
 }
+
 .descriptionText{
-    height: 266.66px;
-    width: 200px;
+    height: 378.01px;
+    width: 283.51px;
+    background-size: cover;
     background-color: rgb(149, 149, 149);
     object-fit: contain;
-    margin: 0%;
+    
     
 }
 

@@ -9,7 +9,7 @@ const router = express.Router();
 router.put('/likes/:id', ( req, res ) => {
 
     let idToUpdate = req.params.id;
-    let likeStatus =  Number(req.body.likes)
+    let likeStatus =  req.body.likes
     
     
     let sqlQuery =`
@@ -31,6 +31,7 @@ router.put('/likes/:id', ( req, res ) => {
 
 // POST
 router.post("/", (req, res) => {
+
     const newPhoto = req.body;
     
     const sqlQuery = `
@@ -52,6 +53,7 @@ router.post("/", (req, res) => {
 
 // GET Route
 router.get('/', (req, res) => {
+
     const sqlText = `
       SELECT * FROM react_gallery
         ORDER BY id;
@@ -69,7 +71,7 @@ router.get('/', (req, res) => {
 
 
 router.delete("/:id", (req, res) => {
-    console.log(req.params);
+    
     let idToDelete = req.params.id;
     let sqlQuery = `
               DELETE FROM "react_gallery"

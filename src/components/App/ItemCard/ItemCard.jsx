@@ -2,17 +2,17 @@ import axios from 'axios';
 import { Button, ButtonGroup } from '@material-ui/core';
 import { useState, } from 'react';
 import './ItemCard.css'
-import { PictureAsPdfOutlined } from '@material-ui/icons';
 
-function ItemCard( {photo, getPhotos  } ) {
+function ItemCard( {photo, getPhotos } ) {
 
     const [descriptionState, setDiscriptionState] = useState(false);
 
-    // handle click on the like button.
 
 
+    // Click handler/PUT route
     const increaseLikes = (event) =>{
 
+        // Create individual counter to send over, based on the previous photo.likes value. Adds one.
         let newCount = Number(photo.likes) + 1
 
         axios({
@@ -21,12 +21,9 @@ function ItemCard( {photo, getPhotos  } ) {
          data: {
             likes: newCount
          }
-        })
-        .then((response) => {
-            console.log(response);
+        }).then((response) => {
             getPhotos();
-        })
-        .catch((error) => {
+        }).catch((error) => {
          console.log('Error in PUT', error);
         })
      }
@@ -36,13 +33,11 @@ function ItemCard( {photo, getPhotos  } ) {
         console.log(event.currentTarget.id);
         axios.delete(`/gallery/${event.currentTarget.id}`)
             .then(() => {
-            getPhotos();
-            alert("Photo deleted!");
+                getPhotos();
+                    alert("Photo deleted!");
       });
     } 
 
-
-    // Return the 'card' with button attached to it.
     switch (descriptionState){
         case false:    
             return (

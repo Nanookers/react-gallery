@@ -2,6 +2,7 @@ import {useState} from 'react';
 import axios from 'axios';
 import { TextField } from '@material-ui/core';
 import { Button } from '@material-ui/core';
+import './SubmissionForm.css'
 
 function SubmissionForm({getPhotos}) {
     let [photoInput, setPhotoInput] = useState('');
@@ -16,7 +17,6 @@ function SubmissionForm({getPhotos}) {
           }
         ).then(response => {
           getPhotos();
-          console.log('response:', response)
         }).catch(error => {
           console.log('Error in POST client', error)
         })
@@ -32,7 +32,7 @@ function SubmissionForm({getPhotos}) {
         <>
             <h1> Add A Photo </h1>
             
-            <form onSubmit={handleSubmit}>
+            <form className='inputField' onSubmit={handleSubmit}>
                 <TextField id="standard-basic" 
                     className='urlButton'
                         label="Photo URL" 
