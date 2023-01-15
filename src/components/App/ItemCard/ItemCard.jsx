@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Button } from '@material-ui/core';
+import { Button, ButtonGroup } from '@material-ui/core';
 import { useState, } from 'react';
 import './ItemCard.css'
 import { PictureAsPdfOutlined } from '@material-ui/icons';
@@ -13,11 +13,13 @@ function ItemCard( {photo, getPhotos  } ) {
 
     const increaseLikes = (event) =>{
 
+        let newCount = Number(photo.likes) + 1
+
         axios({
          method: 'PUT',
          url: `/gallery/likes/${event.currentTarget.id}`,
          data: {
-            likes: 1
+            likes: newCount
          }
         })
         .then((response) => {
@@ -52,19 +54,25 @@ function ItemCard( {photo, getPhotos  } ) {
                                         <img className="cardBody" id = {photo.id} src= {photo.path} />
                                            
                                 </div>
-                                
-                               <Button variant="contained" 
-                                    onClick={increaseLikes}
-                                        id={photo.id} 
-                                            style={{width: 200}}>
-                                                {photo.likes === 0 ? "Like This Photo" : `Liked ${photo.likes} Times!`}    
-                                </Button>
 
-                                <Button variant="contained" 
-                                    onClick={deletePost}
-                                        id={photo.id} 
-                                            style={{width: 200}}> Delete   
-                                </Button>
+                                <ButtonGroup
+                                    disableElevation
+                                    variant="contained"
+                                    aria-label="Disabled elevation buttons"
+                                    
+                                >
+                                    <Button
+                                        onClick={increaseLikes}
+                                            id={photo.id} 
+                                                style={{width: 200}}>
+                                                    {photo.likes === 0 ? "Like This Photo" : `Liked ${photo.likes} Times!`}
+                                    </Button>
+                                    <Button 
+                                        onClick={deletePost}
+                                            id={photo.id} > Delete
+                                    </Button>
+                                </ButtonGroup>
+
                             </div>   
                     </div>
                 
@@ -77,17 +85,23 @@ function ItemCard( {photo, getPhotos  } ) {
                                 <p className='descriptionText'>{photo.description}</p>
                         </div>
                                 
-                               <Button variant="contained" 
-                                    onClick={increaseLikes}
-                                        id={photo.id} 
-                                            style={{width: 200}}>
-                                                {photo.likes === 0 ? "Like This Photo" : `Liked ${photo.likes} Times!`}    
-                                </Button>
-                               <Button variant="contained" 
-                                    onClick={deletePost}
-                                        id={photo.id} 
-                                            style={{width: 200}}> Delete   
-                                </Button>
+                               <ButtonGroup
+                                    disableElevation
+                                    variant="contained"
+                                    aria-label="Disabled elevation buttons"
+                                    
+                                >
+                                    <Button
+                                        onClick={increaseLikes}
+                                            id={photo.id} 
+                                                style={{width: 200}}>
+                                                    {photo.likes === 0 ? "Like This Photo" : `Liked ${photo.likes} Times!`}
+                                    </Button>
+                                    <Button 
+                                        onClick={deletePost}
+                                            id={photo.id} > Delete
+                                    </Button>
+                                </ButtonGroup>
                     </div>                
             </div>
 
