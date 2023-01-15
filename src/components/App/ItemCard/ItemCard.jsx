@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import { Button } from '@material-ui/core';
 import { useState, } from 'react';
 import './ItemCard.css'
@@ -8,18 +8,23 @@ function ItemCard( {photo, getPhotos  } ) {
     const [descriptionState, setDiscriptionState] = useState(false);
 
     // handle click on the like button.
-    const increaseLikes = (event) =>{
-        
-        let id = event.currentTarget.id
-        Axios.put(`/gallery/like/${id}`,
-            {
+
+    
+    const increaseLikes = () => {
+        console.log(photo);
+        axios ({
+            method: 'PUT',
+            url: `/gallery/likes/1`,
+            data: {
                 likes: 1
-            }).then((response) => {
-                getPhotos();
-            }).catch(err => {
-                console.log(err);
-            });
+            }
+        }).then((response) => {
+            getPhotos();
+        }).catch((error) => {
+            console.log('404 from me', error);
+        })
     }
+
 
     // Return the 'card' with button attached to it.
     switch (descriptionState){

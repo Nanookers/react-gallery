@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const imgur =require('imgur');
+const fileUpload = require('express-fileupload')
 const gallery = require('./routes/gallery.router.js');
 const PORT = process.env.PORT || 5000;
 
